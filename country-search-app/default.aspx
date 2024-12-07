@@ -18,10 +18,10 @@
         <div class="text-center">
             <asp:Image runat="server" ID="imgFlag" CssClass="img-fluid mb-3"/>
             <div class="mb-2">
-                <asp:Label ID="lblCountry" runat="server" Text="" CssClass="h4"></asp:Label>
+                <asp:Label ID="lblCountry" runat="server" Text="" CssClass="h3"></asp:Label>
             </div>
             <div class="mb-2">
-                <asp:Label ID="lblOfficial" runat="server" Text="" CssClass="h5"></asp:Label>
+                <asp:Label ID="lblOfficial" runat="server" Text=""></asp:Label>
             </div>
             <div class="mb-2">
                 <asp:Label ID="lblCapital" runat="server" Text="" CssClass="h5"></asp:Label>

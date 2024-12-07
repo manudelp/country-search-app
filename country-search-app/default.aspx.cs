@@ -55,7 +55,7 @@ namespace country_search_app
 
             using (HttpClient client = new HttpClient())
             {
-                HttpResponseMessage response = await client.GetAsync($"https://restcountries.com/v3.1/name/{name}");
+                HttpResponseMessage response = await client.GetAsync($"https://restcountries.com/v3.1/name/{name}?fullText=true");
 
                 if (response.IsSuccessStatusCode)
                 {
