@@ -12,8 +12,8 @@
 <body>
     <form id="form1" runat="server" class="container mt-5">
         <div class="form-group">
-            <asp:TextBox ID="txtCountry" runat="server" Placeholder="Ingrese un país" CssClass="form-control mb-2"></asp:TextBox>
-            <asp:Button ID="btnSearch" runat="server" Text="Buscar" CssClass="btn btn-primary mb-3" OnClick="btnSearch_Click" />
+            <asp:TextBox ID="txtCountry" runat="server" Placeholder="Search by country name..." CssClass="form-control mb-2"></asp:TextBox>
+            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary mb-3" OnClick="btnSearch_Click" />
         </div>
         <div class="text-center">
             <asp:Image runat="server" ID="imgFlag" CssClass="img-fluid mb-3"/>

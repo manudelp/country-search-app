@@ -68,12 +68,13 @@ namespace country_search_app
 
         protected async void btnSearch_Click(object sender, EventArgs e)
         {
+            string countryName = txtCountry.Text;
             string searchResult = await searchCountry();
 
             if (searchResult == "error")
             {
                 imgFlag.ImageUrl = "https://placehold.co/300x200?text=Country%20Not%20Found";
-                lblCountry.Text = "";
+                lblCountry.Text = "Country searched: " + countryName;
                 lblCapital.Text = "";
                 lblPopulation.Text = "";
                 lblArea.Text = "";
@@ -87,8 +88,8 @@ namespace country_search_app
                 imgFlag.ImageUrl = flag;
                 lblCountry.Text = country.name.common;
                 lblCapital.Text = "Capital: " + (country.capital != null && country.capital.Count > 0 ? country.capital[0] : "No disponible");
-                lblPopulation.Text = "Población: " + country.population.ToString("N0");
-                lblArea.Text = "Área: " + country.area.ToString("N0") + " km²";
+                lblPopulation.Text = "Population: " + country.population.ToString("N0");
+                lblArea.Text = "Area: " + country.area.ToString("N0") + " km²";
             }
         }
 
