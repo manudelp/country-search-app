@@ -85,7 +85,7 @@ namespace country_search_app
 
                 if (searchResult == "error")
                 {
-                    imgFlag.ImageUrl = "https://placehold.co/300x200?text=País%20No%20Encontrado";
+                    imgFlag.ImageUrl = "https://placehold.co/300x200?text=Not%20found";
                     lblCountry.Text = $"Searched country: {countryName}";
                     lblOfficial.Text = "Please ensure the country name is spelled correctly.";
                     lblCapital.Text = "";
