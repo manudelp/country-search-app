@@ -21,6 +21,9 @@
                 <asp:Label ID="lblCountry" runat="server" Text="" CssClass="h4"></asp:Label>
             </div>
             <div class="mb-2">
+                <asp:Label ID="lblOfficial" runat="server" Text="" CssClass="h5"></asp:Label>
+            </div>
+            <div class="mb-2">
                 <asp:Label ID="lblCapital" runat="server" Text="" CssClass="h5"></asp:Label>
             </div>
             <div class="mb-2">
@@ -30,6 +33,8 @@
                 <asp:Label ID="lblArea" runat="server" Text="" CssClass="h5"></asp:Label>
             </div>
         </div>
+
+        <asp:Label ID="lblError" runat="server" CssClass="d-none alert alert-danger mt-3" role="alert"></asp:Label>
     </form>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/jquery-3.7.0.min.js"></script>

@@ -16,13 +16,15 @@ namespace country_search_app
         {
             if (!IsPostBack)
             {
-
+                
             }
         }
 
+        // Clases para deserializar la respuesta JSON  
         public class Name
         {
             public string common { get; set; }
+            public string official { get; set; }
         }
 
         public class Flags
@@ -41,11 +43,12 @@ namespace country_search_app
             public double area { get; set; }
         }
 
+        // Propiedades para almacenar datos del país  
         public List<string> capital { get; set; }
         public long population { get; set; }
         public double area { get; set; }
-        
 
+        // Método para buscar un país por nombre  
         private async Task<string> searchCountry()
         {
             string name = txtCountry.Text;
@@ -66,32 +69,63 @@ namespace country_search_app
             }
         }
 
+        // Método que se ejecuta al hacer clic en el botón de búsqueda  
         protected async void btnSearch_Click(object sender, EventArgs e)
         {
-            string countryName = txtCountry.Text;
-            string searchResult = await searchCountry();
+            string countryName = txtCountry.Text.Trim();
 
-            if (searchResult == "error")
+            if (string.IsNullOrWhiteSpace(countryName))
             {
-                imgFlag.ImageUrl = "https://placehold.co/300x200?text=Country%20Not%20Found";
-                lblCountry.Text = "Country searched: " + countryName;
-                lblCapital.Text = "";
-                lblPopulation.Text = "";
-                lblArea.Text = "";
+                lblError.Text = "Por favor, ingrese el nombre de un país.";
+                return;
             }
-            else
-            {
-                var countries = JsonConvert.DeserializeObject<List<Country>>(searchResult);
-                var country = countries[0];
-                var flag = country.flags.png;
 
-                imgFlag.ImageUrl = flag;
-                lblCountry.Text = country.name.common;
-                lblCapital.Text = "Capital: " + (country.capital != null && country.capital.Count > 0 ? country.capital[0] : "No disponible");
-                lblPopulation.Text = "Population: " + country.population.ToString("N0");
-                lblArea.Text = "Area: " + country.area.ToString("N0") + " km²";
+            btnSearch.Enabled = false;
+            lblError.Text = "";
+
+            try
+            {
+                string searchResult = await searchCountry();
+
+                if (searchResult == "error")
+                {
+                    imgFlag.ImageUrl = "https://placehold.co/300x200?text=País%20No%20Encontrado";
+                    lblCountry.Text = $"País buscado: {countryName}";
+                    lblOfficial.Text = "";
+                    lblCapital.Text = "";
+                    lblPopulation.Text = "";
+                    lblArea.Text = "";
+                }
+                else
+                {
+                    var countries = JsonConvert.DeserializeObject<List<Country>>(searchResult);
+
+                    if (countries == null || countries.Count == 0)
+                    {
+                        lblError.CssClass = lblError.CssClass.Replace("d-none", "").Trim();
+                        lblError.Text = "No country has been found.";
+                        return;
+                    }
+
+                    var country = countries[0];
+                    imgFlag.ImageUrl = country.flags?.png ?? "https://placehold.co/300x200?text=Sin%20Bandera";
+                    lblCountry.Text = country.name?.common ?? "Unknown";
+                    lblOfficial.Text = country.name?.official ?? "Unknown";
+                    lblCapital.Text = "Capital: " + (country.capital?.Count > 0 ? country.capital[0] : "Not available");
+                    lblPopulation.Text = "Población: " + country.population.ToString("N0");
+                    lblArea.Text = "Área: " + country.area.ToString("N0") + " km²";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.CssClass = lblError.CssClass.Replace("d-none", "").Trim();
+                lblError.Text = "An error ocurred, please try again";
+                System.Diagnostics.Trace.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                btnSearch.Enabled = true;
             }
         }
-
     }
 }
