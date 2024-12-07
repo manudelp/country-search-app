@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -76,7 +72,7 @@ namespace country_search_app
 
             if (string.IsNullOrWhiteSpace(countryName))
             {
-                lblError.Text = "Por favor, ingrese el nombre de un país.";
+                lblError.Text = "Please input a country";
                 return;
             }
 
@@ -112,8 +108,8 @@ namespace country_search_app
                     lblCountry.Text = country.name?.common ?? "Unknown";
                     lblOfficial.Text = country.name?.official ?? "Unknown";
                     lblCapital.Text = "Capital: " + (country.capital?.Count > 0 ? country.capital[0] : "Not available");
-                    lblPopulation.Text = "Población: " + country.population.ToString("N0");
-                    lblArea.Text = "Área: " + country.area.ToString("N0") + " km²";
+                    lblPopulation.Text = "Population: " + country.population.ToString("N0");
+                    lblArea.Text = "Area: " + country.area.ToString("N0") + " km²";
                 }
             }
             catch (Exception ex)
